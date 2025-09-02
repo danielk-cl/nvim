@@ -32,3 +32,4 @@ vim.opt.colorcolumn = "80"
 
 -- show hidden characters
 vim.cmd("set list")
+vim.cmd("set listchars=tab:>-,eol:¬,trail:⋅")
