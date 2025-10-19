@@ -23,6 +23,15 @@ return {
             },
         })
 
-        vim.api.nvim_create_user_command('Explore', require("nvim-tree.api").tree.open, {})
+        vim.api.nvim_create_user_command('Explore', function(opts)
+            require("nvim-tree.api").tree.open(
+                {
+                    find_file = true,
+                    focus = opts.bang,
+                })
+        end, {
+            bang = true,
+            desc = "Open NvimTree and find the current file",
+        })
     end
 }
