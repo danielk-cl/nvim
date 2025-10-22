@@ -29,9 +29,11 @@ return {
             ensure_installed = {
                 "lua_ls",        -- lua
                 "rust_analyzer", -- rust
-                "gopls",         -- golang
-                "pylsp",         -- python
-                "clangd",        -- C, C++, and more
+                -- "gopls",         -- golang
+                -- python
+                "basedpyright",
+                "pylsp",
+                "clangd", -- C, C++, and more
             },
             handlers = {
                 function(server_name) -- default handler (optional)
@@ -64,6 +66,17 @@ return {
                         }
                     }
                 end,
+
+                ["basedpyright"] = function()
+                    local lspconfig = require("lspconfig")
+
+                    lspconfig.basedpyright.setup {
+                        capabilities = capabilities,
+                        on_attach = function(client, bufnr)
+                            client.server_capabilities.definitionProvider = false
+                        end
+                    }
+                end
             }
         })
 
