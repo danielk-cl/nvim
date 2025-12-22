@@ -11,6 +11,22 @@ return {
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "j-hui/fidget.nvim",
+        {
+            "SmiteshP/nvim-navic",
+            dependencies = {
+                "neovim/nvim-lspconfig"
+            },
+            opts = { lsp = { auto_attach = true, preference = { "pylsp" } } },
+        },
+        {
+            "SmiteshP/nvim-navbuddy",
+            dependencies = {
+                "SmiteshP/nvim-navic",
+                "MunifTanjim/nui.nvim"
+            },
+            opts = { lsp = { auto_attach = true } }
+        }
+
     },
 
     config = function()
@@ -22,6 +38,8 @@ return {
             vim.lsp.protocol.make_client_capabilities(),
             cmp_lsp.default_capabilities()
         )
+
+        vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
 
         require("fidget").setup({})
         require("mason").setup()
@@ -74,6 +92,7 @@ return {
                         capabilities = capabilities,
                         on_attach = function(client, bufnr)
                             client.server_capabilities.definitionProvider = false
+                            client.server_capabilities.referencesProvider = false
                         end
                     }
                 end
