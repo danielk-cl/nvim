@@ -1,10 +1,16 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
-        "williamboman/mason.nvim",
+        {
+            "mason-org/mason.nvim",
+            opts = {}
+        },
         "williamboman/mason-lspconfig.nvim",
         "L3MON4D3/LuaSnip",
-        "j-hui/fidget.nvim",
+        {
+            "j-hui/fidget.nvim",
+            opts = {}
+        },
         "hrsh7th/cmp-nvim-lsp",
         {
             "SmiteshP/nvim-navic",
@@ -90,10 +96,6 @@ return {
         )
 
         vim.o.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
-
-        require("fidget").setup({})
-        require("mason").setup()
-
 
         vim.diagnostic.config({
             -- update_in_insert = true,
