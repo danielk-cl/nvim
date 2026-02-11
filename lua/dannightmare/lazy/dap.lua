@@ -12,7 +12,7 @@ return {
     keys = {
         -- Basic debugging keymaps, feel free to change to your liking!
         {
-            '<F5>',
+            '<leader>dc',
             function() require('dap').continue() end,
             desc = 'Debug: Start/Continue',
         },
@@ -60,7 +60,7 @@ return {
         },
     },
     config = function()
-        local dap = require "dap"
+        local dap = require("dap")
         local dapui = require("dapui")
         require("nvim-dap-virtual-text").setup({
             commented = true,
@@ -116,11 +116,6 @@ return {
         --     args = { "dap", "-l", "127.0.0.1:${port}" },
         --   },
         -- }
-
-        dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-        dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-        dap.listeners.before.event_exited['dapui_config'] = dapui.close
-
 
         dap.listeners.before.attach.dapui_config = function()
             dapui.open()
