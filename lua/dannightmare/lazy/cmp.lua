@@ -23,6 +23,7 @@ return {
                 ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
                 ['<C-y>'] = cmp.mapping.confirm({ select = true }),
                 ["<C-Space>"] = cmp.mapping.complete(),
+                ["<C-h>"] = cmp.mapping.open_docs(),
             }),
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
