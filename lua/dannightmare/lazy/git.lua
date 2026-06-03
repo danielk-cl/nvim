@@ -37,6 +37,7 @@ return {
             vim.keymap.set("n", "gh", "<cmd>diffget //3<CR>")
 
             vim.keymap.set("n", "<leader>ge", ":Gedit")
+            vim.keymap.set("n", "<leader>gb", ":G blame")
         end
     },
     {

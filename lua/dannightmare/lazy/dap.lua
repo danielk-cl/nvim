@@ -48,15 +48,19 @@ return {
             desc = 'Debug: See last session result.',
         },
         {
-            "<leader>gb",
+            "<leader>gc",
             function() require('dap').run_to_cursor() end,
             desc = 'Debug: Run to cursor',
         },
         -- Eval var under cursor
         {
-            "<space>?",
+            "<leader>?",
             function() require("dapui").eval(nil, { enter = true }) end,
             desc = 'Debug: Evaluate',
+        },
+        {
+            "<leader>e",
+            function() require("dapui").eval(vim.fn.input("Eval > "), { enter = true }) end,
         },
     },
     config = function()
@@ -67,6 +71,21 @@ return {
         })
         -- require("dap-go").setup()
         require("dap-python").setup("python3")
+
+        table.insert(dap.configurations.python, {
+            type = 'python',
+            request = 'launch',
+            name = "Launch from Project Root",
+            cwd = vim.fn.getcwd,
+            program = '${file}',
+        })
+
+        for _, config in ipairs(dap.configurations.python) do
+            config.cwd = config.cwd or vim.fn.getcwd
+            config.env = function()
+                return { PYTHONPATH = vim.fn.getcwd() }
+            end
+        end
 
         require('mason-nvim-dap').setup {
             -- Makes a best effort to setup the various debuggers with
