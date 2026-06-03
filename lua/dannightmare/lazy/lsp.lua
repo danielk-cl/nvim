@@ -13,7 +13,6 @@ return {
                     "rust_analyzer", -- rust
                     -- "gopls",         -- golang
                     -- python
-                    "basedpyright",
                     "pylsp",
                     "clangd", -- C, C++, and more
                 },
